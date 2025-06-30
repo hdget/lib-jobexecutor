@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package protobuf;
+
+option go_package = "github.com/hdget/lib-jobexecutor/protobuf";
+
+service Job {
+  rpc Invoke(JobInvokeRequest) returns (JobInvokeResponse) {};    // Job调用内部服务
+  rpc UpdateProgress(JobUpdateProgressRequest) returns (JobUpdateProgressResponse) {} // Job更新进度
+}
+
+message JobInvokeRequest {
+  string app = 1;
+  int32 version = 2;
+  string module = 3;
+  string method = 4;
+  bytes request = 5;
+}
+
+message JobInvokeResponse {
+  bytes response = 1;
+}
+
+message JobUpdateProgressRequest {
+  int64 taskId = 1;
+  int32 progress = 2;
+}
+
+message JobUpdateProgressResponse {
+}
