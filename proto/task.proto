@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package protobuf;
 
-option go_package = "github.com/hdget/lib-jobexecutor/protobuf";
+option go_package = "./protobuf";
 
 service Task {
   rpc Execute (TaskExecuteRequest) returns (TaskExecuteResponse);

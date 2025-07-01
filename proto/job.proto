@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package protobuf;
 
-option go_package = "github.com/hdget/lib-jobexecutor/protobuf";
+option go_package = "./protobuf";
 
 service Job {
   rpc Invoke(JobInvokeRequest) returns (JobInvokeResponse) {};    // Job调用内部服务

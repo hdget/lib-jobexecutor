@@ -248,7 +248,8 @@ const file_proto_job_proto_rawDesc = "" +
 	"\x19JobUpdateProgressResponse2\xa7\x01\n" +
 	"\x03Job\x12C\n" +
 	"\x06Invoke\x12\x1a.protobuf.JobInvokeRequest\x1a\x1b.protobuf.JobInvokeResponse\"\x00\x12[\n" +
-	"\x0eUpdateProgress\x12\".protobuf.JobUpdateProgressRequest\x1a#.protobuf.JobUpdateProgressResponse\"\x00B+Z)github.com/hdget/lib-jobexecutor/protobufb\x06proto3"
+	"\x0eUpdateProgress\x12\".protobuf.JobUpdateProgressRequest\x1a#.protobuf.JobUpdateProgressResponse\"\x00B\fZ\n" +
+	"./protobufb\x06proto3"
 
 var (
 	file_proto_job_proto_rawDescOnce sync.Once

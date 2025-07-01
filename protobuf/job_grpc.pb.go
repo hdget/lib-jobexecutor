@@ -85,7 +85,7 @@ func (UnimplementedJobServer) mustEmbedUnimplementedJobServer() {}
 func (UnimplementedJobServer) testEmbeddedByValue()             {}
 
 // UnsafeJobServer may be embedded to opt out of forward compatibility for this service.
-// Use of this shared is not recommended, as added methods to JobServer will
+// Use of this interface is not recommended, as added methods to JobServer will
 // result in compilation errors.
 type UnsafeJobServer interface {
 	mustEmbedUnimplementedJobServer()

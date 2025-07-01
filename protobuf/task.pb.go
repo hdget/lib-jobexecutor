@@ -133,7 +133,8 @@ const file_proto_task_proto_rawDesc = "" +
 	"\x06result\x18\x01 \x01(\tR\x06result\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error2N\n" +
 	"\x04Task\x12F\n" +
-	"\aExecute\x12\x1c.protobuf.TaskExecuteRequest\x1a\x1d.protobuf.TaskExecuteResponseB+Z)github.com/hdget/lib-jobexecutor/protobufb\x06proto3"
+	"\aExecute\x12\x1c.protobuf.TaskExecuteRequest\x1a\x1d.protobuf.TaskExecuteResponseB\fZ\n" +
+	"./protobufb\x06proto3"
 
 var (
 	file_proto_task_proto_rawDescOnce sync.Once

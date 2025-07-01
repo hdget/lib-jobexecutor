@@ -69,7 +69,7 @@ func (UnimplementedTaskServer) mustEmbedUnimplementedTaskServer() {}
 func (UnimplementedTaskServer) testEmbeddedByValue()              {}
 
 // UnsafeTaskServer may be embedded to opt out of forward compatibility for this service.
-// Use of this shared is not recommended, as added methods to TaskServer will
+// Use of this interface is not recommended, as added methods to TaskServer will
 // result in compilation errors.
 type UnsafeTaskServer interface {
 	mustEmbedUnimplementedTaskServer()
