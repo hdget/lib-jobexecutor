@@ -5,11 +5,11 @@ package protobuf;
 option go_package = "./protobuf";
 
 service Job {
-  rpc Invoke(JobInvokeRequest) returns (JobInvokeResponse) {};    // Job调用内部服务
+  rpc InvokeService(JobInvokeServiceRequest) returns (JobInvokeServiceResponse) {};    // Job调用内部服务
   rpc UpdateProgress(JobUpdateProgressRequest) returns (JobUpdateProgressResponse) {} // Job更新进度
 }
 
-message JobInvokeRequest {
+message JobInvokeServiceRequest {
   string app = 1;
   int32 version = 2;
   string module = 3;
@@ -17,7 +17,7 @@ message JobInvokeRequest {
   bytes request = 5;
 }
 
-message JobInvokeResponse {
+message JobInvokeServiceResponse {
   bytes response = 1;
 }
 

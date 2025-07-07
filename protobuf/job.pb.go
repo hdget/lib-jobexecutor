@@ -21,7 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type JobInvokeRequest struct {
+type JobInvokeServiceRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	App           string                 `protobuf:"bytes,1,opt,name=app,proto3" json:"app,omitempty"`
 	Version       int32                  `protobuf:"varint,2,opt,name=version,proto3" json:"version,omitempty"`
@@ -32,20 +32,20 @@ type JobInvokeRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *JobInvokeRequest) Reset() {
-	*x = JobInvokeRequest{}
+func (x *JobInvokeServiceRequest) Reset() {
+	*x = JobInvokeServiceRequest{}
 	mi := &file_proto_job_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *JobInvokeRequest) String() string {
+func (x *JobInvokeServiceRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*JobInvokeRequest) ProtoMessage() {}
+func (*JobInvokeServiceRequest) ProtoMessage() {}
 
-func (x *JobInvokeRequest) ProtoReflect() protoreflect.Message {
+func (x *JobInvokeServiceRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_job_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -57,67 +57,67 @@ func (x *JobInvokeRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use JobInvokeRequest.ProtoReflect.Descriptor instead.
-func (*JobInvokeRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use JobInvokeServiceRequest.ProtoReflect.Descriptor instead.
+func (*JobInvokeServiceRequest) Descriptor() ([]byte, []int) {
 	return file_proto_job_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *JobInvokeRequest) GetApp() string {
+func (x *JobInvokeServiceRequest) GetApp() string {
 	if x != nil {
 		return x.App
 	}
 	return ""
 }
 
-func (x *JobInvokeRequest) GetVersion() int32 {
+func (x *JobInvokeServiceRequest) GetVersion() int32 {
 	if x != nil {
 		return x.Version
 	}
 	return 0
 }
 
-func (x *JobInvokeRequest) GetModule() string {
+func (x *JobInvokeServiceRequest) GetModule() string {
 	if x != nil {
 		return x.Module
 	}
 	return ""
 }
 
-func (x *JobInvokeRequest) GetMethod() string {
+func (x *JobInvokeServiceRequest) GetMethod() string {
 	if x != nil {
 		return x.Method
 	}
 	return ""
 }
 
-func (x *JobInvokeRequest) GetRequest() []byte {
+func (x *JobInvokeServiceRequest) GetRequest() []byte {
 	if x != nil {
 		return x.Request
 	}
 	return nil
 }
 
-type JobInvokeResponse struct {
+type JobInvokeServiceResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Response      []byte                 `protobuf:"bytes,1,opt,name=response,proto3" json:"response,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *JobInvokeResponse) Reset() {
-	*x = JobInvokeResponse{}
+func (x *JobInvokeServiceResponse) Reset() {
+	*x = JobInvokeServiceResponse{}
 	mi := &file_proto_job_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *JobInvokeResponse) String() string {
+func (x *JobInvokeServiceResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*JobInvokeResponse) ProtoMessage() {}
+func (*JobInvokeServiceResponse) ProtoMessage() {}
 
-func (x *JobInvokeResponse) ProtoReflect() protoreflect.Message {
+func (x *JobInvokeServiceResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_job_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -129,12 +129,12 @@ func (x *JobInvokeResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use JobInvokeResponse.ProtoReflect.Descriptor instead.
-func (*JobInvokeResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use JobInvokeServiceResponse.ProtoReflect.Descriptor instead.
+func (*JobInvokeServiceResponse) Descriptor() ([]byte, []int) {
 	return file_proto_job_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *JobInvokeResponse) GetResponse() []byte {
+func (x *JobInvokeServiceResponse) GetResponse() []byte {
 	if x != nil {
 		return x.Response
 	}
@@ -233,21 +233,21 @@ var File_proto_job_proto protoreflect.FileDescriptor
 
 const file_proto_job_proto_rawDesc = "" +
 	"\n" +
-	"\x0fproto/job.proto\x12\bprotobuf\"\x88\x01\n" +
-	"\x10JobInvokeRequest\x12\x10\n" +
+	"\x0fproto/job.proto\x12\bprotobuf\"\x8f\x01\n" +
+	"\x17JobInvokeServiceRequest\x12\x10\n" +
 	"\x03app\x18\x01 \x01(\tR\x03app\x12\x18\n" +
 	"\aversion\x18\x02 \x01(\x05R\aversion\x12\x16\n" +
 	"\x06module\x18\x03 \x01(\tR\x06module\x12\x16\n" +
 	"\x06method\x18\x04 \x01(\tR\x06method\x12\x18\n" +
-	"\arequest\x18\x05 \x01(\fR\arequest\"/\n" +
-	"\x11JobInvokeResponse\x12\x1a\n" +
+	"\arequest\x18\x05 \x01(\fR\arequest\"6\n" +
+	"\x18JobInvokeServiceResponse\x12\x1a\n" +
 	"\bresponse\x18\x01 \x01(\fR\bresponse\"N\n" +
 	"\x18JobUpdateProgressRequest\x12\x16\n" +
 	"\x06taskId\x18\x01 \x01(\x03R\x06taskId\x12\x1a\n" +
 	"\bprogress\x18\x02 \x01(\x05R\bprogress\"\x1b\n" +
-	"\x19JobUpdateProgressResponse2\xa7\x01\n" +
-	"\x03Job\x12C\n" +
-	"\x06Invoke\x12\x1a.protobuf.JobInvokeRequest\x1a\x1b.protobuf.JobInvokeResponse\"\x00\x12[\n" +
+	"\x19JobUpdateProgressResponse2\xbc\x01\n" +
+	"\x03Job\x12X\n" +
+	"\rInvokeService\x12!.protobuf.JobInvokeServiceRequest\x1a\".protobuf.JobInvokeServiceResponse\"\x00\x12[\n" +
 	"\x0eUpdateProgress\x12\".protobuf.JobUpdateProgressRequest\x1a#.protobuf.JobUpdateProgressResponse\"\x00B\fZ\n" +
 	"./protobufb\x06proto3"
 
@@ -265,15 +265,15 @@ func file_proto_job_proto_rawDescGZIP() []byte {
 
 var file_proto_job_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_proto_job_proto_goTypes = []any{
-	(*JobInvokeRequest)(nil),          // 0: protobuf.JobInvokeRequest
-	(*JobInvokeResponse)(nil),         // 1: protobuf.JobInvokeResponse
+	(*JobInvokeServiceRequest)(nil),   // 0: protobuf.JobInvokeServiceRequest
+	(*JobInvokeServiceResponse)(nil),  // 1: protobuf.JobInvokeServiceResponse
 	(*JobUpdateProgressRequest)(nil),  // 2: protobuf.JobUpdateProgressRequest
 	(*JobUpdateProgressResponse)(nil), // 3: protobuf.JobUpdateProgressResponse
 }
 var file_proto_job_proto_depIdxs = []int32{
-	0, // 0: protobuf.Job.Invoke:input_type -> protobuf.JobInvokeRequest
+	0, // 0: protobuf.Job.InvokeService:input_type -> protobuf.JobInvokeServiceRequest
 	2, // 1: protobuf.Job.UpdateProgress:input_type -> protobuf.JobUpdateProgressRequest
-	1, // 2: protobuf.Job.Invoke:output_type -> protobuf.JobInvokeResponse
+	1, // 2: protobuf.Job.InvokeService:output_type -> protobuf.JobInvokeServiceResponse
 	3, // 3: protobuf.Job.UpdateProgress:output_type -> protobuf.JobUpdateProgressResponse
 	2, // [2:4] is the sub-list for method output_type
 	0, // [0:2] is the sub-list for method input_type

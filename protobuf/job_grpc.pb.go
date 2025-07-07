@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Job_Invoke_FullMethodName         = "/protobuf.Job/Invoke"
+	Job_InvokeService_FullMethodName  = "/protobuf.Job/InvokeService"
 	Job_UpdateProgress_FullMethodName = "/protobuf.Job/UpdateProgress"
 )
 
@@ -27,7 +27,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type JobClient interface {
-	Invoke(ctx context.Context, in *JobInvokeRequest, opts ...grpc.CallOption) (*JobInvokeResponse, error)
+	InvokeService(ctx context.Context, in *JobInvokeServiceRequest, opts ...grpc.CallOption) (*JobInvokeServiceResponse, error)
 	UpdateProgress(ctx context.Context, in *JobUpdateProgressRequest, opts ...grpc.CallOption) (*JobUpdateProgressResponse, error)
 }
 
@@ -39,10 +39,10 @@ func NewJobClient(cc grpc.ClientConnInterface) JobClient {
 	return &jobClient{cc}
 }
 
-func (c *jobClient) Invoke(ctx context.Context, in *JobInvokeRequest, opts ...grpc.CallOption) (*JobInvokeResponse, error) {
+func (c *jobClient) InvokeService(ctx context.Context, in *JobInvokeServiceRequest, opts ...grpc.CallOption) (*JobInvokeServiceResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(JobInvokeResponse)
-	err := c.cc.Invoke(ctx, Job_Invoke_FullMethodName, in, out, cOpts...)
+	out := new(JobInvokeServiceResponse)
+	err := c.cc.Invoke(ctx, Job_InvokeService_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ func (c *jobClient) UpdateProgress(ctx context.Context, in *JobUpdateProgressReq
 // All implementations must embed UnimplementedJobServer
 // for forward compatibility.
 type JobServer interface {
-	Invoke(context.Context, *JobInvokeRequest) (*JobInvokeResponse, error)
+	InvokeService(context.Context, *JobInvokeServiceRequest) (*JobInvokeServiceResponse, error)
 	UpdateProgress(context.Context, *JobUpdateProgressRequest) (*JobUpdateProgressResponse, error)
 	mustEmbedUnimplementedJobServer()
 }
@@ -75,8 +75,8 @@ type JobServer interface {
 // pointer dereference when methods are called.
 type UnimplementedJobServer struct{}
 
-func (UnimplementedJobServer) Invoke(context.Context, *JobInvokeRequest) (*JobInvokeResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Invoke not implemented")
+func (UnimplementedJobServer) InvokeService(context.Context, *JobInvokeServiceRequest) (*JobInvokeServiceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InvokeService not implemented")
 }
 func (UnimplementedJobServer) UpdateProgress(context.Context, *JobUpdateProgressRequest) (*JobUpdateProgressResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateProgress not implemented")
@@ -102,20 +102,20 @@ func RegisterJobServer(s grpc.ServiceRegistrar, srv JobServer) {
 	s.RegisterService(&Job_ServiceDesc, srv)
 }
 
-func _Job_Invoke_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(JobInvokeRequest)
+func _Job_InvokeService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(JobInvokeServiceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(JobServer).Invoke(ctx, in)
+		return srv.(JobServer).InvokeService(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Job_Invoke_FullMethodName,
+		FullMethod: Job_InvokeService_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(JobServer).Invoke(ctx, req.(*JobInvokeRequest))
+		return srv.(JobServer).InvokeService(ctx, req.(*JobInvokeServiceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -146,8 +146,8 @@ var Job_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*JobServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Invoke",
-			Handler:    _Job_Invoke_Handler,
+			MethodName: "InvokeService",
+			Handler:    _Job_InvokeService_Handler,
 		},
 		{
 			MethodName: "UpdateProgress",

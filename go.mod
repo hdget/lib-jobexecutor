@@ -1,6 +1,6 @@
 module github.com/hdget/lib-jobexecutor
 
-go 1.23.7
+go 1.23.1
 
 require (
 	github.com/hashicorp/go-plugin v1.6.3

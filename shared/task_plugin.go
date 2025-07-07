@@ -7,11 +7,16 @@ import (
 	"google.golang.org/grpc"
 )
 
+const (
+	protocolVersion = 1
+	magicCookieKey  = "TASK_PLUGIN"
+)
+
 // GetHandshakeConfig 确保主程序与插件版本兼容
 func GetHandshakeConfig(token string) plugin.HandshakeConfig {
 	return plugin.HandshakeConfig{
-		ProtocolVersion:  1,
-		MagicCookieKey:   "TASK_PLUGIN",
+		ProtocolVersion:  protocolVersion,
+		MagicCookieKey:   magicCookieKey,
 		MagicCookieValue: token,
 	}
 }
