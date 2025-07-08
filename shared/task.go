@@ -10,7 +10,7 @@ type Task interface {
 	Execute(ctx context.Context, request *protobuf.TaskExecuteRequest) (*protobuf.TaskExecuteResponse, error)
 }
 
-// TaskClient 实现 Task 接口的客户端适配器
+// TaskClient 实现Task接口的客户端适配器
 type TaskClient struct {
 	client protobuf.TaskClient
 }
