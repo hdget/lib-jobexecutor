@@ -7,24 +7,9 @@ import (
 	"google.golang.org/grpc"
 )
 
-const (
-	protocolVersion = 1
-	magicCookieKey  = "TASK_PLUGIN"
-)
-
-// GetHandshakeConfig 确保主程序与插件版本兼容
-func GetHandshakeConfig(token string) plugin.HandshakeConfig {
-	return plugin.HandshakeConfig{
-		ProtocolVersion:  protocolVersion,
-		MagicCookieKey:   magicCookieKey,
-		MagicCookieValue: token,
-	}
-}
-
 type TaskPlugin struct {
 	plugin.NetRPCUnsupportedPlugin
 	Impl protobuf.TaskServer
-	Job  protobuf.JobClient
 }
 
 func (t TaskPlugin) GRPCServer(broker *plugin.GRPCBroker, server *grpc.Server) error {
