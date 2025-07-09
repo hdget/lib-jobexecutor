@@ -5,16 +5,23 @@ package protobuf;
 option go_package = "./protobuf";
 
 service Task {
-  rpc Execute (TaskExecuteRequest) returns (TaskExecuteResponse);
+  rpc Execute (ExecuteTaskRequest) returns (ExecuteTaskResponse) {};
+  rpc GetDescription(GetTaskDescriptionRequest) returns (GetTaskDescriptionResponse) {};
+}
+
+message ExecuteTaskRequest {
+  bytes request = 1;
+}
+
+message ExecuteTaskResponse {
+  bytes response = 1;
 }
 
 // 执行请求
-message TaskExecuteRequest {
-  map<string, string> params = 1;
+message GetTaskDescriptionRequest {
 }
 
 // 执行响应
-message TaskExecuteResponse {
-  string result = 1;
-  string error = 2; // 错误信息
+message GetTaskDescriptionResponse {
+  string description = 1;
 }
