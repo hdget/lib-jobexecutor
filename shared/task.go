@@ -7,7 +7,7 @@ import (
 
 type Task interface {
 	Execute(ctx context.Context, request *protobuf.ExecuteTaskRequest) (*protobuf.ExecuteTaskResponse, error) // 执行任务
-	GetDescription(ctx context.Context) (string, error)                                                       // 获取任务描述
+	GetDescription() (string, error)                                                                          // 获取任务描述
 }
 
 // TaskClient 实现Task接口的客户端适配器
@@ -15,8 +15,8 @@ type TaskClient struct {
 	client protobuf.TaskClient
 }
 
-func (c *TaskClient) Execute(request []byte) ([]byte, error) {
-	result, err := c.client.Execute(context.Background(), &protobuf.ExecuteTaskRequest{
+func (c *TaskClient) Execute(ctx context.Context, request []byte) ([]byte, error) {
+	result, err := c.client.Execute(ctx, &protobuf.ExecuteTaskRequest{
 		Request: request,
 	})
 	if err != nil {
