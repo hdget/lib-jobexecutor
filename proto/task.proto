@@ -10,7 +10,8 @@ service Task {
 }
 
 message ExecuteTaskRequest {
-  bytes request = 1;
+  int64 jobId = 1;
+  bytes jobRequest = 2;
 }
 
 message ExecuteTaskResponse {

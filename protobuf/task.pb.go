@@ -23,7 +23,8 @@ const (
 
 type ExecuteTaskRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Request       []byte                 `protobuf:"bytes,1,opt,name=request,proto3" json:"request,omitempty"`
+	JobId         int64                  `protobuf:"varint,1,opt,name=jobId,proto3" json:"jobId,omitempty"`
+	JobRequest    []byte                 `protobuf:"bytes,2,opt,name=jobRequest,proto3" json:"jobRequest,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -58,9 +59,16 @@ func (*ExecuteTaskRequest) Descriptor() ([]byte, []int) {
 	return file_proto_task_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ExecuteTaskRequest) GetRequest() []byte {
+func (x *ExecuteTaskRequest) GetJobId() int64 {
 	if x != nil {
-		return x.Request
+		return x.JobId
+	}
+	return 0
+}
+
+func (x *ExecuteTaskRequest) GetJobRequest() []byte {
+	if x != nil {
+		return x.JobRequest
 	}
 	return nil
 }
@@ -203,9 +211,12 @@ var File_proto_task_proto protoreflect.FileDescriptor
 
 const file_proto_task_proto_rawDesc = "" +
 	"\n" +
-	"\x10proto/task.proto\x12\bprotobuf\".\n" +
-	"\x12ExecuteTaskRequest\x12\x18\n" +
-	"\arequest\x18\x01 \x01(\fR\arequest\"?\n" +
+	"\x10proto/task.proto\x12\bprotobuf\"J\n" +
+	"\x12ExecuteTaskRequest\x12\x14\n" +
+	"\x05jobId\x18\x01 \x01(\x03R\x05jobId\x12\x1e\n" +
+	"\n" +
+	"jobRequest\x18\x02 \x01(\fR\n" +
+	"jobRequest\"?\n" +
 	"\x13ExecuteTaskResponse\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\x12\x16\n" +
 	"\x06errMsg\x18\x02 \x01(\tR\x06errMsg\"\x1b\n" +

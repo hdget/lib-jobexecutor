@@ -6,8 +6,8 @@ import (
 )
 
 type Task interface {
-	Execute(ctx context.Context, request *protobuf.ExecuteTaskRequest) (*protobuf.ExecuteTaskResponse, error) // 执行任务
-	GetDescription() (string, error)                                                                          // 获取任务描述
+	Execute(ctx context.Context, jobId int64, jobRequest []byte) (*protobuf.ExecuteTaskResponse, error) // 执行任务
+	GetDescription() (string, error)                                                                    // 获取任务描述
 }
 
 // TaskClient 实现Task接口的客户端适配器
@@ -15,9 +15,10 @@ type TaskClient struct {
 	client protobuf.TaskClient
 }
 
-func (c *TaskClient) Execute(ctx context.Context, request []byte) (*protobuf.ExecuteTaskResponse, error) {
+func (c *TaskClient) Execute(ctx context.Context, jobId int64, jobRequest []byte) (*protobuf.ExecuteTaskResponse, error) {
 	response, err := c.client.Execute(ctx, &protobuf.ExecuteTaskRequest{
-		Request: request,
+		JobId:      jobId,
+		JobRequest: jobRequest,
 	})
 	if err != nil {
 		return nil, err
