@@ -14,7 +14,8 @@ message ExecuteTaskRequest {
 }
 
 message ExecuteTaskResponse {
-  bytes response = 1;
+  string url = 1;
+  string errMsg = 2;
 }
 
 // 执行请求

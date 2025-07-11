@@ -67,7 +67,8 @@ func (x *ExecuteTaskRequest) GetRequest() []byte {
 
 type ExecuteTaskResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Response      []byte                 `protobuf:"bytes,1,opt,name=response,proto3" json:"response,omitempty"`
+	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	ErrMsg        string                 `protobuf:"bytes,2,opt,name=errMsg,proto3" json:"errMsg,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -102,11 +103,18 @@ func (*ExecuteTaskResponse) Descriptor() ([]byte, []int) {
 	return file_proto_task_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *ExecuteTaskResponse) GetResponse() []byte {
+func (x *ExecuteTaskResponse) GetUrl() string {
 	if x != nil {
-		return x.Response
+		return x.Url
 	}
-	return nil
+	return ""
+}
+
+func (x *ExecuteTaskResponse) GetErrMsg() string {
+	if x != nil {
+		return x.ErrMsg
+	}
+	return ""
 }
 
 // 执行请求
@@ -197,9 +205,10 @@ const file_proto_task_proto_rawDesc = "" +
 	"\n" +
 	"\x10proto/task.proto\x12\bprotobuf\".\n" +
 	"\x12ExecuteTaskRequest\x12\x18\n" +
-	"\arequest\x18\x01 \x01(\fR\arequest\"1\n" +
-	"\x13ExecuteTaskResponse\x12\x1a\n" +
-	"\bresponse\x18\x01 \x01(\fR\bresponse\"\x1b\n" +
+	"\arequest\x18\x01 \x01(\fR\arequest\"?\n" +
+	"\x13ExecuteTaskResponse\x12\x10\n" +
+	"\x03url\x18\x01 \x01(\tR\x03url\x12\x16\n" +
+	"\x06errMsg\x18\x02 \x01(\tR\x06errMsg\"\x1b\n" +
 	"\x19GetTaskDescriptionRequest\">\n" +
 	"\x1aGetTaskDescriptionResponse\x12 \n" +
 	"\vdescription\x18\x01 \x01(\tR\vdescription2\xaf\x01\n" +
