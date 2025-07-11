@@ -15,14 +15,14 @@ type TaskClient struct {
 	client protobuf.TaskClient
 }
 
-func (c *TaskClient) Execute(ctx context.Context, request []byte) ([]byte, error) {
-	result, err := c.client.Execute(ctx, &protobuf.ExecuteTaskRequest{
+func (c *TaskClient) Execute(ctx context.Context, request []byte) (*protobuf.ExecuteTaskResponse, error) {
+	response, err := c.client.Execute(ctx, &protobuf.ExecuteTaskRequest{
 		Request: request,
 	})
 	if err != nil {
 		return nil, err
 	}
-	return result.Response, nil
+	return response, nil
 }
 
 func (c *TaskClient) GetDescription() (string, error) {
