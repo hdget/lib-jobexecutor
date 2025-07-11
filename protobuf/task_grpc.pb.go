@@ -19,14 +19,16 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Task_Execute_FullMethodName = "/protobuf.Task/Execute"
+	Task_Execute_FullMethodName        = "/protobuf.Task/Execute"
+	Task_GetDescription_FullMethodName = "/protobuf.Task/GetDescription"
 )
 
 // TaskClient is the client API for Task service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TaskClient interface {
-	Execute(ctx context.Context, in *TaskExecuteRequest, opts ...grpc.CallOption) (*TaskExecuteResponse, error)
+	Execute(ctx context.Context, in *ExecuteTaskRequest, opts ...grpc.CallOption) (*ExecuteTaskResponse, error)
+	GetDescription(ctx context.Context, in *GetTaskDescriptionRequest, opts ...grpc.CallOption) (*GetTaskDescriptionResponse, error)
 }
 
 type taskClient struct {
@@ -37,10 +39,20 @@ func NewTaskClient(cc grpc.ClientConnInterface) TaskClient {
 	return &taskClient{cc}
 }
 
-func (c *taskClient) Execute(ctx context.Context, in *TaskExecuteRequest, opts ...grpc.CallOption) (*TaskExecuteResponse, error) {
+func (c *taskClient) Execute(ctx context.Context, in *ExecuteTaskRequest, opts ...grpc.CallOption) (*ExecuteTaskResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(TaskExecuteResponse)
+	out := new(ExecuteTaskResponse)
 	err := c.cc.Invoke(ctx, Task_Execute_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *taskClient) GetDescription(ctx context.Context, in *GetTaskDescriptionRequest, opts ...grpc.CallOption) (*GetTaskDescriptionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTaskDescriptionResponse)
+	err := c.cc.Invoke(ctx, Task_GetDescription_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +63,8 @@ func (c *taskClient) Execute(ctx context.Context, in *TaskExecuteRequest, opts .
 // All implementations must embed UnimplementedTaskServer
 // for forward compatibility.
 type TaskServer interface {
-	Execute(context.Context, *TaskExecuteRequest) (*TaskExecuteResponse, error)
+	Execute(context.Context, *ExecuteTaskRequest) (*ExecuteTaskResponse, error)
+	GetDescription(context.Context, *GetTaskDescriptionRequest) (*GetTaskDescriptionResponse, error)
 	mustEmbedUnimplementedTaskServer()
 }
 
@@ -62,8 +75,11 @@ type TaskServer interface {
 // pointer dereference when methods are called.
 type UnimplementedTaskServer struct{}
 
-func (UnimplementedTaskServer) Execute(context.Context, *TaskExecuteRequest) (*TaskExecuteResponse, error) {
+func (UnimplementedTaskServer) Execute(context.Context, *ExecuteTaskRequest) (*ExecuteTaskResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Execute not implemented")
+}
+func (UnimplementedTaskServer) GetDescription(context.Context, *GetTaskDescriptionRequest) (*GetTaskDescriptionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDescription not implemented")
 }
 func (UnimplementedTaskServer) mustEmbedUnimplementedTaskServer() {}
 func (UnimplementedTaskServer) testEmbeddedByValue()              {}
@@ -87,7 +103,7 @@ func RegisterTaskServer(s grpc.ServiceRegistrar, srv TaskServer) {
 }
 
 func _Task_Execute_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(TaskExecuteRequest)
+	in := new(ExecuteTaskRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -99,7 +115,25 @@ func _Task_Execute_Handler(srv interface{}, ctx context.Context, dec func(interf
 		FullMethod: Task_Execute_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskServer).Execute(ctx, req.(*TaskExecuteRequest))
+		return srv.(TaskServer).Execute(ctx, req.(*ExecuteTaskRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Task_GetDescription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTaskDescriptionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TaskServer).GetDescription(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Task_GetDescription_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TaskServer).GetDescription(ctx, req.(*GetTaskDescriptionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -114,6 +148,10 @@ var Task_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Execute",
 			Handler:    _Task_Execute_Handler,
+		},
+		{
+			MethodName: "GetDescription",
+			Handler:    _Task_GetDescription_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

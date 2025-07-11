@@ -143,7 +143,7 @@ func (x *JobInvokeServiceResponse) GetResponse() []byte {
 
 type JobUpdateProgressRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TaskId        int64                  `protobuf:"varint,1,opt,name=taskId,proto3" json:"taskId,omitempty"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Progress      int32                  `protobuf:"varint,2,opt,name=progress,proto3" json:"progress,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -179,9 +179,9 @@ func (*JobUpdateProgressRequest) Descriptor() ([]byte, []int) {
 	return file_proto_job_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *JobUpdateProgressRequest) GetTaskId() int64 {
+func (x *JobUpdateProgressRequest) GetId() int64 {
 	if x != nil {
-		return x.TaskId
+		return x.Id
 	}
 	return 0
 }
@@ -229,6 +229,110 @@ func (*JobUpdateProgressResponse) Descriptor() ([]byte, []int) {
 	return file_proto_job_proto_rawDescGZIP(), []int{3}
 }
 
+type JobCreateAttachmentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	JobName       string                 `protobuf:"bytes,1,opt,name=jobName,proto3" json:"jobName,omitempty"`
+	Filename      string                 `protobuf:"bytes,2,opt,name=filename,proto3" json:"filename,omitempty"`
+	Data          []byte                 `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *JobCreateAttachmentRequest) Reset() {
+	*x = JobCreateAttachmentRequest{}
+	mi := &file_proto_job_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JobCreateAttachmentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JobCreateAttachmentRequest) ProtoMessage() {}
+
+func (x *JobCreateAttachmentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_job_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use JobCreateAttachmentRequest.ProtoReflect.Descriptor instead.
+func (*JobCreateAttachmentRequest) Descriptor() ([]byte, []int) {
+	return file_proto_job_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *JobCreateAttachmentRequest) GetJobName() string {
+	if x != nil {
+		return x.JobName
+	}
+	return ""
+}
+
+func (x *JobCreateAttachmentRequest) GetFilename() string {
+	if x != nil {
+		return x.Filename
+	}
+	return ""
+}
+
+func (x *JobCreateAttachmentRequest) GetData() []byte {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type JobCreateAttachmentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *JobCreateAttachmentResponse) Reset() {
+	*x = JobCreateAttachmentResponse{}
+	mi := &file_proto_job_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JobCreateAttachmentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JobCreateAttachmentResponse) ProtoMessage() {}
+
+func (x *JobCreateAttachmentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_job_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use JobCreateAttachmentResponse.ProtoReflect.Descriptor instead.
+func (*JobCreateAttachmentResponse) Descriptor() ([]byte, []int) {
+	return file_proto_job_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *JobCreateAttachmentResponse) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
 var File_proto_job_proto protoreflect.FileDescriptor
 
 const file_proto_job_proto_rawDesc = "" +
@@ -241,14 +345,21 @@ const file_proto_job_proto_rawDesc = "" +
 	"\x06method\x18\x04 \x01(\tR\x06method\x12\x18\n" +
 	"\arequest\x18\x05 \x01(\fR\arequest\"6\n" +
 	"\x18JobInvokeServiceResponse\x12\x1a\n" +
-	"\bresponse\x18\x01 \x01(\fR\bresponse\"N\n" +
-	"\x18JobUpdateProgressRequest\x12\x16\n" +
-	"\x06taskId\x18\x01 \x01(\x03R\x06taskId\x12\x1a\n" +
+	"\bresponse\x18\x01 \x01(\fR\bresponse\"F\n" +
+	"\x18JobUpdateProgressRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1a\n" +
 	"\bprogress\x18\x02 \x01(\x05R\bprogress\"\x1b\n" +
-	"\x19JobUpdateProgressResponse2\xbc\x01\n" +
+	"\x19JobUpdateProgressResponse\"f\n" +
+	"\x1aJobCreateAttachmentRequest\x12\x18\n" +
+	"\ajobName\x18\x01 \x01(\tR\ajobName\x12\x1a\n" +
+	"\bfilename\x18\x02 \x01(\tR\bfilename\x12\x12\n" +
+	"\x04data\x18\x03 \x01(\fR\x04data\"/\n" +
+	"\x1bJobCreateAttachmentResponse\x12\x10\n" +
+	"\x03url\x18\x01 \x01(\tR\x03url2\x9f\x02\n" +
 	"\x03Job\x12X\n" +
 	"\rInvokeService\x12!.protobuf.JobInvokeServiceRequest\x1a\".protobuf.JobInvokeServiceResponse\"\x00\x12[\n" +
-	"\x0eUpdateProgress\x12\".protobuf.JobUpdateProgressRequest\x1a#.protobuf.JobUpdateProgressResponse\"\x00B\fZ\n" +
+	"\x0eUpdateProgress\x12\".protobuf.JobUpdateProgressRequest\x1a#.protobuf.JobUpdateProgressResponse\"\x00\x12a\n" +
+	"\x10CreateAttachment\x12$.protobuf.JobCreateAttachmentRequest\x1a%.protobuf.JobCreateAttachmentResponse\"\x00B\fZ\n" +
 	"./protobufb\x06proto3"
 
 var (
@@ -263,20 +374,24 @@ func file_proto_job_proto_rawDescGZIP() []byte {
 	return file_proto_job_proto_rawDescData
 }
 
-var file_proto_job_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_proto_job_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_proto_job_proto_goTypes = []any{
-	(*JobInvokeServiceRequest)(nil),   // 0: protobuf.JobInvokeServiceRequest
-	(*JobInvokeServiceResponse)(nil),  // 1: protobuf.JobInvokeServiceResponse
-	(*JobUpdateProgressRequest)(nil),  // 2: protobuf.JobUpdateProgressRequest
-	(*JobUpdateProgressResponse)(nil), // 3: protobuf.JobUpdateProgressResponse
+	(*JobInvokeServiceRequest)(nil),     // 0: protobuf.JobInvokeServiceRequest
+	(*JobInvokeServiceResponse)(nil),    // 1: protobuf.JobInvokeServiceResponse
+	(*JobUpdateProgressRequest)(nil),    // 2: protobuf.JobUpdateProgressRequest
+	(*JobUpdateProgressResponse)(nil),   // 3: protobuf.JobUpdateProgressResponse
+	(*JobCreateAttachmentRequest)(nil),  // 4: protobuf.JobCreateAttachmentRequest
+	(*JobCreateAttachmentResponse)(nil), // 5: protobuf.JobCreateAttachmentResponse
 }
 var file_proto_job_proto_depIdxs = []int32{
 	0, // 0: protobuf.Job.InvokeService:input_type -> protobuf.JobInvokeServiceRequest
 	2, // 1: protobuf.Job.UpdateProgress:input_type -> protobuf.JobUpdateProgressRequest
-	1, // 2: protobuf.Job.InvokeService:output_type -> protobuf.JobInvokeServiceResponse
-	3, // 3: protobuf.Job.UpdateProgress:output_type -> protobuf.JobUpdateProgressResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	4, // 2: protobuf.Job.CreateAttachment:input_type -> protobuf.JobCreateAttachmentRequest
+	1, // 3: protobuf.Job.InvokeService:output_type -> protobuf.JobInvokeServiceResponse
+	3, // 4: protobuf.Job.UpdateProgress:output_type -> protobuf.JobUpdateProgressResponse
+	5, // 5: protobuf.Job.CreateAttachment:output_type -> protobuf.JobCreateAttachmentResponse
+	3, // [3:6] is the sub-list for method output_type
+	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -293,7 +408,7 @@ func file_proto_job_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_job_proto_rawDesc), len(file_proto_job_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
