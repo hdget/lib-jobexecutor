@@ -4,7 +4,6 @@ go 1.23.1
 
 require (
 	github.com/hashicorp/go-plugin v1.6.3
-	github.com/pkg/errors v0.9.1
 	google.golang.org/grpc v1.73.0
 	google.golang.org/protobuf v1.36.6
 )
